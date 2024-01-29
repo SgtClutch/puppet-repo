@@ -42,7 +42,5 @@ class profile::postgresql (
     require => Service['postgresql'],
   }
 
-  package { 'postgresql-client':
-    ensure => installed,
-  }
+  
 }
