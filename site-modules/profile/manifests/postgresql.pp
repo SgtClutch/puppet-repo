@@ -1,7 +1,13 @@
 class profile::postgresql (
   $postgres_password = 'TPSrep0rt!',
 ) {
-  package { 'postgresql-server':
+  $package_name = $facts['os']['family'] ? {
+    'RedHat' => 'postgresql-server',
+    'Debian' => 'postgresql',
+    default  => 'postgresql', # Assuming default for other OS families
+  }
+
+  package { $package_name:
     ensure => installed,
   }
 
@@ -21,7 +27,7 @@ class profile::postgresql (
   service { 'postgresql':
     ensure  => running,
     enable  => true,
-    require => [Package['postgresql-server'], Exec['initdb']],
+    require => [Package[$package_name], Exec['initdb']],
   }
 
   file { '/var/lib/pgsql/data/pg_hba.conf':
@@ -42,5 +48,5 @@ class profile::postgresql (
     require => Service['postgresql'],
   }
 
-  
+ 
 }
