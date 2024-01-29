@@ -1,6 +1,4 @@
-class profile::postgresql (
-  $postgres_password = 'TPSrep0rt!',
-) {
+class profile::postgresql  {
   $package_name = $facts['os']['family'] ? {
     'RedHat' => 'postgresql-server',
     'Debian' => 'postgresql',
@@ -42,11 +40,12 @@ class profile::postgresql (
     require => Service['postgresql'],
   }
 
+  $postgres_password = 'TPSrep0rt!'
+
   exec { 'set_postgres_password':
     command => "/usr/bin/psql -U postgres -c \"ALTER USER postgres WITH PASSWORD '${postgres_password}';\"",
     unless  => "/usr/bin/psql -U postgres -c 'SELECT 1' | grep -q 1",
     require => Service['postgresql'],
   }
 
- 
-}
+ }
