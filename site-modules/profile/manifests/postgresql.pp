@@ -28,13 +28,13 @@ class profile::postgresql  {
     require => [Package[$package_name], Exec['initdb']],
   }
 
-  file { '/var/lib/pgsql/data/pg_hba.conf':
+  file { '/etc/postgresql/14/main/pg_hba.conf':
     ensure  => file,
     content => "host    all             all             0.0.0.0/0            md5\n",
     require => Service['postgresql'],
   }
 
-  file { '/var/lib/pgsql/data/postgresql.conf':
+  file { '/etc/postgresql/14/main/postgresql.conf':
     ensure  => file,
     content => "listen_addresses = '*'\n",
     require => Service['postgresql'],
