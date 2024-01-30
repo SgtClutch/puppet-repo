@@ -40,10 +40,10 @@ class profile::postgresql  {
     require => Service['postgresql'],
   }
 
-  $postgres_password = 'TPSrep0rt!'
+
 
   exec { 'set_postgres_password':
-    command => "/usr/bin/psql -U postgres -c \"ALTER USER postgres WITH PASSWORD '${postgres_password}';\"",
+    command => "/usr/bin/psql -U postgres -c \"ALTER USER postgres WITH PASSWORD 'TPSrep0rt!'",
     unless  => "/usr/bin/psql -U postgres -c 'SELECT 1' | grep -q 1",
     require => Service['postgresql'],
   }
