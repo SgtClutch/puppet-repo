@@ -47,6 +47,7 @@ class profile::postgresql  {
     unless  => 'sudo -u postgres psql -c "SELECT 1" | grep -q 1',
     require => Service['postgresql'],
     refreshonly => true,
+    path => '/usr/bin/sudo',
   }
 
  }
