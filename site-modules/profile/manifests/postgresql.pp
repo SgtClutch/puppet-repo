@@ -40,7 +40,7 @@ class profile::postgresql  {
   file_line { 'all_listen_address':
     path    => '/etc/postgresql/14/main/postgresql.conf',
     line    => 'listen_address=*',
-    match   => '^#listen_addresses = 'localhost'',
+    match   => "^#listen_addresses = 'localhost'",
     notify  => Service['postgresql'],
     
 
