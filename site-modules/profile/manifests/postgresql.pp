@@ -33,7 +33,7 @@ class profile::postgresql  {
     line    => 'host    all             all             0.0.0.0/0            md5',
     match   => '^host\s+all\s+all\s+0\.0\.0\.0/0\s+md5$',
     notify  => Service['postgresql'],
-    require => Service['postgresql'],
+    
 
   }
 
@@ -42,7 +42,7 @@ class profile::postgresql  {
     line    => 'listen_address=*',
     match   => '^#listen_address = ',
     notify  => Service['postgresql'],
-    require => Service['postgresql'],
+    
 
   }
 
