@@ -48,12 +48,5 @@ class profile::postgresql  {
 
 
 
-  exec { 'set_postgres_password':
-    command => 'sudo -u postgres psql -c "ALTER USER postgres PASSWORD \'TPSrep0rt!\';"',
-    unless  => 'sudo -u postgres psql -c "SELECT 1" | grep -q 1',
-    require => Service['postgresql'],
-    refreshonly => true,
-    path => '/usr/bin/sudo',
-  }
 
  }
